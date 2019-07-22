@@ -1,0 +1,67 @@
+
+#############################################################################
+##		NÃO REALIZAR ALTERAÇÕES NO CÓDIGO ABAIXO		   ##
+#############################################################################
+
+##Definição de Portas como Entrada ou Saida
+#Define todos as Portas como ENTRADA
+procedure io_define_output_all()
+	call hardware_io_port_config_direction(0, 255)
+	call hardware_io_port_config_direction(1, 255)
+	call hardware_io_port_config_direction(2, 255)
+
+end
+
+#Define a Porta 0 como ENTRADA
+procure io_define_input_p0()
+	call hardware_io_port_config_direction(0, 255)
+end
+
+#Define a Porta 1 como ENTRADA
+procure io_define_input_p1()
+	call hardware_io_port_config_direction(1, 255)
+end
+
+#Define a Porta 2 como ENTRADA
+procure io_define_input_p2()
+	call hardware_io_port_config_direction(2, 255)
+end
+	
+#Define todos as Portas como SAíDA
+procedure io_define_output_all()
+	call hardware_io_port_config_direction(0, 255)
+	call hardware_io_port_config_direction(1, 255)
+	call hardware_io_port_config_direction(2, 255)
+
+end
+
+#Define a Porta 0 como SAíDA
+procure io_define_output_p0()
+	call hardware_io_port_config_direction(0, 255)
+end
+
+#Define a Porta 1 como SAíDA
+procure io_define_output_p1()
+	call hardware_io_port_config_direction(1, 255)
+end
+
+#Define a Porta 2 como SAíDA
+procure io_define_output_p2()
+	call hardware_io_port_config_direction(2, 255)
+end
+
+
+	call hardware_io_port_write(0,255,0)
+	call hardware_io_port_write(1,255,0)
+	call hardware_io_port_write(2,255,0)
+procedure atualizaGPIO()
+	if estado = 1
+		call hardware_io_port_write(Port_LED,Pino_LED,Pino_LED)
+	else
+		call hardware_io_port_write(Port_LED,Pino_LED,0)
+	end if
+end
+
+#############################################################################
+##		NÃO REALIZAR ALTERAÇÕES NO CÓDIGO ACIMA			  ##
+#############################################################################

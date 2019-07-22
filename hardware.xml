@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<hardware>
+    
+    <!--PARA DESABILITAR UMA CONFIGURAÇÃO, DIGITE "<!--CONFIGURAÇÃO-->"
+    <!--POR EXEMPLO: <!-- <usb enable="true" endpoint="none" /> -->
+    <!--Mais informações no CONFIGURATION GUIDE-->
+    
+    <!--Configuração do modo "Sleep" do oscilador-->
+	<sleeposc enable="true" ppm="30" /> 
+    <!--Configuração do BGScript-->
+    <script enable="true" />
+    <!--Redução do Clock de 32MHz para 250KHz-->
+    <slow_clock enable="true" />
+    <!--Bloquear a interface de Debug ATENÇÃO:Nunca utilizar esta função-->
+    <lock_debug enable="true" />
+    <!--Configuração dos modos de sleep-->
+    <sleep enable="true" max_mode="2" />
+    <!--Configuração do pino de Wake Up-->
+    <wakeup_pin enable="true" port="0" pin="0" state="up" />
+    <!--Configuração do Wake Up externo-->
+    <host_wakeup_pin enable="true" port="1" pin="1" state="up" />
+    <!--Configuração da potência do transmissor-->
+    <txpower power="15" bias="5" />
+    <!--Configuração do pino de controle do conversor DC/DC externo-->
+    <pmux regulator_pin="7" />
+    <!--Configuração das portas de IO-->
+    <port index="0" tristatemask="0" pull="down" />
+    <!--Configuação da interface USB-->
+    <usb enable="true" endpoint="none" />
+    <!--Configuação da interface UART-->
+    <usart channel="1" alternate="1" baud="115200" endpoint="api" />
+    <!--Configuração do prescaler global dos Timers 1,3 e 4-->
+	<timer_ticks speed="0" />
+    <!--Configuração o hardware do(s) Timer(s)-->
+    <timer index="1" enabled_channels="0x1f" divisor="0" mode="2" alternate="2" />
+    <!--Configuração da interface UART para uso do UART DFU Bootloader-->
+    <uartboot channel="1" alternate="1" baud="115200" />
+    <!--Configuração do bootloader para a atualização Over-the-Air-->
+    <otaboot source="external" uart="0" cs_port="1" cs_pin="2" power_port="1" power_pin="0" />
+    
+</hardware>

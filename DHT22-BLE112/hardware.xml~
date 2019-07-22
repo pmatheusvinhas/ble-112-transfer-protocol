@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hardware>
+	<sleeposc enable="true" ppm="30" />
+    <txpower power="15" bias="5" />
+    <script enable="true" />
+	<sleep enable="false" />
+	<timer_ticks speed="0" />
+	<slow_clock enable = "false" />
+</hardware>

@@ -1,0 +1,89 @@
+
+#UUID : 6E400001-B5A3-F393-E0A9-E50E24DC0003
+##############################################################################
+######Implementação do padrão IEEE 754 para envio de dados através do BLE#####
+##############################################################################
+#Autor: Paulo Matheus Vinhas
+#Orientador: Alexandre Aragão
+#Data: Abril/2018
+#Embedded Lab
+#Instituto Federal de São Paulo
+
+dim entrada_float,entrada_inteiro,expoente,mantissa,potencia
+export dim saida
+
+export procedure ieee754(entrada)
+
+    ##Definição do Sinal
+    if entrada < 0 then
+        saida = $80000000
+        entrada_inteiro = entrada*(-1)
+        entrada_float = (entrada*(-1)) - entrada_inteiro
+    else
+        saida = $00000000
+        entrada_inteiro = entrada
+        entrada_float = entrada - entrada_inteiro
+    end if
+
+    ##Calculo do Expoente e Mantissa Inteira
+    expoente = 0
+    if entrada_inteiro then
+        potencia = 1
+        mantissa = 0
+        while entrada_inteiro/2
+            if entrada_inteiro-2 * (entrada_inteiro/2) then
+                mantissa = mantissa + potencia
+            end if
+            entrada_inteiro = entrada_inteiro / 2
+            expoente = expoente + 1
+            potencia = potencia*2
+        end while
+
+        saida = saida + ((expoente + $7F) << 23)
+        #!potencia
+        if potencia = 0 then
+            potencia = $400000
+        else
+            potencia = potencia/2
+            potencia = $400000 / potencia
+            mantissa = mantissa*potencia
+            potencia = potencia/2
+        end if
+    else
+        #!entrada_inteiro
+        while entrada_inteiro = 0
+            expoente = expoente+1
+            entrada_float = entrada_float * 2
+            entrada_inteiro = entrada_float
+        end while
+        saida = saida + (((expoente*(-1)) + $7F) << 23 )
+        mantissa = 0
+        potencia = $400000
+        entrada_float = entrada_float - entrada_inteiro
+    end if
+
+    ##Calculo da Mantissa Decimal
+    while potencia
+        entrada_float = entrada_float * 2
+        entrada_inteiro = entrada_float
+        if entrada_inteiro then
+            mantissa = mantissa + potencia
+            entrada_float = entrada_float - entrada_inteiro
+        end if
+        potencia = potencia / 2
+    end while
+    saida = saida + mantissa
+
+end
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<hardware>
+    <!--PARA DESABILITAR UMA CONFIGURAÇÃO, DIGITE "<!--CONFIGURAÇÃO-->"
+    <!--POR EXEMPLO: <!-- <usb enable="true" endpoint="none" /> -->
+    <!--Mais informações no CONFIGURATION GUIDE-->
+    
+	<sleeposc enable="true" ppm="30" /> 
+    <script enable="true" />
+    <slow_clock enable="true" />
+    <lock_debug enable="true" />
+    <sleep enable="true" max_mode="2" />
+    <wakeup_pin enable="true" port="0" pin="0" state="up" />
+    <host_wakeup_pin enable="true" port="1" pin="1" state="up" />
+    <txpower power="15" bias="5" />
+    <pmux regulator_pin="7" />
+    <port index="0" tristatemask="0" pull="down" />
+    <usb enable="true" endpoint="none" />
+    <usart channel="1" alternate="1" baud="115200" endpoint="api" />
+	<timer_ticks speed="0" />
+    <timer index="1" enabled_channels="0x1f" divisor="0" mode="2" alternate="2" />
+    <uartboot channel="1" alternate="1" baud="115200" />
+    <otaboot source="external" uart="0" cs_port="1" cs_pin="2" power_port="1" power_pin="0" />
+	<slow_clock enable = "false" />
+</hardware>

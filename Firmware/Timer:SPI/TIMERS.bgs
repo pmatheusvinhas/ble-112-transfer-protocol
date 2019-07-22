@@ -1,0 +1,34 @@
+﻿################################
+#####CONFIGURAÇÃO DOS TIMERS#####
+################################
+#Autor: Paulo Matheus Vinhas
+#Data: Abril/2018
+#Embedded Lab
+#Instituto Federal de São Paulo
+
+export procedure inicia_timers()
+#####CONFIGURA O TIMER POR SOFTWARE#####
+#Esta comando gera uma interrupção ao final de contagem do timer.
+#O timer é de 22 bits. Sendo assim, o máximo valor com BLE112 é 2^22 = 4194304/32768Hz = 128 segundos.
+#1s = 32768 Hz
+#HANDLE: É o identificador do timer.
+#MODE: 0 = Repete a contagem* / 1 = Contagem Única*
+# * - O evento do timer é acionado em intervalos definidos com o tempo. A pilha suporta apenas 
+#um timer de repetição de cada vez para fins de confiabilidade. Iniciar um temporizador repetitivo 
+#remove o atual, se houver.§a
+# ** - o evento  do timer é acionado apenas uma vez após um período definido com o tempo. 
+#Pode haver até 8 temporizadores de software não repetitivos sendo executados ao mesmo tempo 
+#(o número máximo, na verdade, depende das atividades atuais da pilha, portanto, pode ser 
+#inferior a 8, às vezes).
+#
+#call hardware_set_soft_timer(TEMPO, HANDLE, MODE)
+
+    call hardware_set_soft_timer(32768, 1, 0)
+
+end
+#Mais informações no documento "BGScript Scripting Language" e V.1.4 API DOCUMENTATION" 
+#na seção de Timers.
+###########################
+###### Fim do Arquivo #####
+###########################
+

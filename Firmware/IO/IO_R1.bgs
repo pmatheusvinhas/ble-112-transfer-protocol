@@ -1,0 +1,72 @@
+################################
+#####CONFIGURAÇÃO DOS GPIOS#####
+################################
+#Autor: Paulo Matheus Vinhas
+#Orientador: Alexandre Aragão
+#Data: Abril/2018
+#Embedded Lab
+#Instituto Federal de São Paulo
+
+export procedure inicia_gpio()
+#####DIREÇÃO DAS PORTAS#####
+# 0 = INPUT (default)/1 = OUTPUT
+#
+# call hardware_io_port_config_direction(PORTA, $MÁSCARA DE BITS EM HEXADECIMAL)
+
+	call hardware_io_port_config_direction(0, $FF)
+	call hardware_io_port_config_direction(1, $00)
+	call hardware_io_port_config_direction(2, $00)
+#-----------------------------------------------------------------------------------------------#	
+##Caso, uma das portas seja direcionada como ENTRADA, fica disponivel a configuração de Pull Up/Pull Down para ela.
+#Vale ressaltar que esta configuração deve ser realizada também no elemento <port> em "hardware.xml".
+#Por padrão, todas as portas exceto P1_0 e P1_1 são configuradas como ENTRADA com pull-up, exceto
+#P1_1 e P1_0 que devem ser configuradas como SAIDA ou colocados resistores pull up externos.
+#Todo os pinos I/O devem ter um nível definido e não devem permanecer flutuantes. Isso pode ser feito 
+#deixando o pino desconectado ou através da configuração do pino como ENTRADA de uso geral com resistor de pull-up.
+#Alternativamente os pinos podem ser configurados como SAIDA de uso geral. Em ambos os casos, os pinos
+#não devem ser conectados diretamente a VDD ou GND, afim de prevenir o consumo excessivo de energia.
+#
+#A porta 2 não aceita interrupção. Os pinos desta porta precisam de um resistor de pull up ou pull down 
+#A porta 2 pode estar configurada com pull up ou pull down no elemento <port> em "hardware.xml", mas
+#qualquer comando em BGScript não trará resultado.
+#
+#call hardware_io_port_config_pull(port, tristate_mask, pull_up)
+#-----------------------------------------------------------------------------------------------#
+	
+#####FUNÇÃO DAS PORTAS#####
+#Na presença da MASCARA DE BITS, a porta correspondente passa a operar como função periférica.
+#Caso contrário, a porta opera como I/O de uso geral.
+#
+#call hardware_io_port_config_function(PORTA, $MÁSCARA DE BITS EM HEXADECIMAL)
+	
+	call hardware_io_port_config_function(0) 	  #Aqui o port 0 é GPIO
+	call hardware_io_port_config_function(1) 
+	#call hardware_io_port_config_function(1, $FF) #Aqui TODA a porta 1 operará em função do perférico conectado a porta 0
+	#call hardware_io_port_config_function(2, $01) #Aqui apenas o bit 1 do port 2  operará em função do perférico conectado no bit 1 do port 2
+#-----------------------------------------------------------------------------------------------#
+
+#####DIREÇÃO DE REQUERIMENTO DE INTERRUPÇÃO DAS PORTAS#####
+#Define-se aqui se a interrupção ocorrerá em  borda de subida ou descida.
+# 0 = SUBIDA /1 = DESCIDA
+#LEMBRETE: A porta 2 não aceita interrupção.
+#
+#hardware_io_port_irq_direction(PORTA, TIPO DE BORDA)
+
+	hardware_io_port_irq_direction(0, 0)
+	hardware_io_port_irq_direction(1, 0)
+#-----------------------------------------------------------------------------------------------#
+
+#####ATIVAÇÃO DE REQUERIMENTO DE INTERRUPÇÃO DAS PORTAS#####
+#0 = Interrupção Desabilitada / 1 = Interrupção Habilitada
+#LEMBRETE: A porta 2 não aceita interrupção.
+#
+#hardware_io_port_irq_enable(PORTA, $MÁSCARA DE BITS EM HEXADECIMAL)
+
+	#hardware_io_port_irq_enable(0, $FF) #Todos os bits da porta 0 estão com interrupçao HABILITADA
+	hardware_io_port_irq_enable(1, $FF) #Todos os bits da porta 1 estão com interrupção DESABILITADA
+
+end
+#Mais informações no documento "BGScript Scripting Language" na seção de I/O.
+###########################
+###### Fim do Arquivo #####
+###########################

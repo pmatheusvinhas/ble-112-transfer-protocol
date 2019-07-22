@@ -1,0 +1,38 @@
+#Ler valores do DHT22 de 5 em 5s e armazenar em uma caracteristica.
+
+dim _
+dim data
+
+event system_boot(major ,minor ,patch ,build ,ll_version ,protocol_version ,hw )
+	call gap_set_mode(gap_general_discoverable,gap_undirected_connectable)
+	call sm_set_bondable_mode(1)
+	call limpaGPIO()
+	call hardware_io_port_config_direction(1, $00) #All pins of port 1 are INPUT
+end
+
+procedure limpaGPIO()
+	call hardware_io_port_config_direction(0, 255)
+	call hardware_io_port_config_direction(1, 255)
+	call hardware_io_port_config_direction(2, 255)
+	call hardware_io_port_write(0,255,0)
+	call hardware_io_port_write(1,255,0)
+	call hardware_io_port_write(2,255,0)
+end
+
+procedure leituraDHT()
+	  call hardware_io_port_read(1, $80)(_, 1, data)
+
+end
+
+#Evento de recepção da leitura nas caracteristicas do BLE
+event attributes_value(connection, reason, handle, offset, value_len, value)
+      if handle = sensorRead then
+      	 call leituraDHT()
+	 
+      end if
+end
+
+#Evento de desconexão do Bluetooth, lançando novo advertising para descoberta 
+event connection_disconnected(handle,result)
+    call gap_set_mode(gap_general_discoverable,gap_undirected_connectable)
+end

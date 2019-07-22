@@ -1,0 +1,31 @@
+﻿################################
+#####CONFIGURAÇÃO DO SPI#####
+################################
+#Autor: Paulo Matheus Vinhas
+#Data: Abril/2018
+#Embedded Lab
+#Instituto Federal de São Paulo
+
+export procedure inicia_spi()
+#####CONFIGURA O SPI####
+#O SPI utiliza os canais USART 0 e 1 para comunicação, por isso, é necessário realizar a configuração da USART
+#para este fim no "hardware.xml". A polaridade,fase,endianness e baud dependem dos requisitos do(s)
+#dispositivo(s) periférico(s) slave(ss SPI ao(s) qual(is) você está conectando o módulo.
+#As interfaces SPI fornecidas pelos módulos BLE podem atualmente ser usadas apenas no modo mestre SPI.
+#Os buffers internos de hardware dentro do módulo não permitem desempenho eficiente no modo escravo SPI.
+#CANAL: 0 = USART 0 / 1 = USART 1
+#POLARIDADE: Polaridade do clock. 0 ou 1.
+#FASE: Fase do clock. 0 ou 1.
+#ENDIANNESS: 0 = LSB / 1 = MSB
+#BAUD_E: Baud rate do expoente
+#BAUD_M: Baud rate da mantissa
+#
+#call hardware_spi_config(CANAL, POLARIDADE, FASE, ENDIANNESS, BAUD_E, BAUD_M)
+
+    call hardware_spi_config(0, 1, 1, 1, 57600, 57600 )
+
+end
+#Mais informações no documento "BGScript Scripting Language" na seção de I/O.
+###########################
+###### Fim do Arquivo #####
+###########################

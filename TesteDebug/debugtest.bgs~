@@ -1,0 +1,16 @@
+
+#Teste de Debugg utilizando a interface USB para printar as mensagems.
+#5.4 Writing data to an endpoint, which is not read
+If the USB interface is enabled and the USB is connected to a USB host, there needs to be an application reading the data written to the USB. Otherwise the BGAPI messages will fill the buffers and cause the firmware to eventually freeze.
+
+#Debug enabled/disabled
+const debug = 1
+
+#System start/boot listener
+event system_boot(major,minor,patch,build,ll_version,protocol,hw)
+
+      # Print debug message
+      if (debug = 1) then
+      	 call system_endpoint_tx(5, 14, "System started\n")
+      end if
+end

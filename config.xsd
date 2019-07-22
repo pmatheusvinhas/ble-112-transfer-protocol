@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="config">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="connections">
+          <xs:complexType>
+            <xs:attribute name="value" type="xs:unsignedByte" default="1" use="optional" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="defrag">
+          <xs:complexType>
+            <xs:attribute name="enable" type="xs:boolean" default="true" use="optional" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="manual_confirm" />
+        <xs:element name="script_timeout">
+          <xs:complexType>
+            <xs:attribute name="value" type="xs:unsignedShort" default="1000" use="optional" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="throughput">
+          <xs:complexType>
+            <xs:attribute name="optimize" type="xs:string" default="balanced" use="optional" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="passkey">
+          <xs:complexType>
+            <xs:attribute name="value" type="xs:string" default="disabled" use="optional" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="user_data">
+          <xs:complexType>
+            <xs:attribute name="size" type="xs:string" default="0x0" use="optional" />
+            <xs:attribute name="file" type="xs:string" use="optional" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="watchdog">
+          <xs:complexType>
+            <xs:attribute name="enable" type="xs:boolean" default="false" use="optional" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="dfu">
+          <xs:complexType>
+            <xs:attribute name="enable" type="xs:boolean" default="true" use="optional" />
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

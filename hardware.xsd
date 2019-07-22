@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="hardware">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="sleeposc">
+          <xs:complexType>
+            <xs:attribute name="enable" type="xs:boolean" default="false" use="optional" />
+            <xs:attribute name="ppm" type="xs:unsignedByte" default="50" use="optional" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="script">
+          <xs:complexType>
+            <xs:attribute name="enable" type="xs:boolean" default="false" use="optional" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="slow_clock">
+          <xs:complexType>
+            <xs:attribute name="enable" type="xs:boolean" default="false" use="optional" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="lock_debug">
+          <xs:complexType>
+            <xs:attribute name="enable" type="xs:boolean" default="false" use="optional" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="sleep">
+          <xs:complexType>
+            <xs:attribute name="enable" type="xs:boolean" default="true" use="optional" />
+            <xs:attribute name="max_mode" type="xs:unsignedByte" default="3" use="optional" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="wakeup_pin">
+          <xs:complexType>
+            <xs:attribute name="enable" type="xs:boolean" default="false" use="optional" />
+            <xs:attribute name="port" type="xs:unsignedByte" use="required" />
+            <xs:attribute name="pin" type="xs:unsignedByte" use="required" />
+            <xs:attribute name="state" type="xs:string" default="up" use="optional" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="host_wakeup_pin">
+          <xs:complexType>
+            <xs:attribute name="enable" type="xs:boolean" default="false" use="optional" />
+            <xs:attribute name="port" type="xs:unsignedByte" use="required" />
+            <xs:attribute name="pin" type="xs:unsignedByte" use="required" />
+            <xs:attribute name="state" type="xs:string" default="up" use="optional" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="txpower">
+          <xs:complexType>
+            <xs:attribute name="power" type="xs:unsignedByte" default="15" use="optional" />
+            <xs:attribute name="bias" type="xs:unsignedByte" fixed="5" use="optional" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="pmux">
+          <xs:complexType>
+            <xs:attribute name="regulator_pin" type="xs:unsignedByte" use="optional" />
+            <xs:attribute name="clock_pin" type="xs:unsignedByte" use="optional" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="port">
+          <xs:complexType>
+            <xs:attribute name="index" type="xs:unsignedByte" use="required" />
+            <xs:attribute name="tristatemask" type="xs:unsignedByte" use="required" />
+            <xs:attribute name="pull" type="xs:string" use="required" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="usb">
+          <xs:complexType>
+            <xs:attribute name="enable" type="xs:boolean" default="false" use="optional" />
+            <xs:attribute name="endpoint" type="xs:string" default="none" use="optional" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="usart">
+          <xs:complexType>
+            <xs:attribute name="channel" type="xs:unsignedByte" use="required" />
+            <xs:attribute name="alternate" type="xs:unsignedByte" use="required" />
+            <xs:attribute name="baud" type="xs:unsignedInt" use="required" />
+            <xs:attribute name="endpoint" type="xs:string" default="none" use="optional" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="timer_ticks">
+          <xs:complexType>
+            <xs:attribute name="speed" type="xs:unsignedByte" default="0" use="optional" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="timer">
+          <xs:complexType>
+            <xs:attribute name="index" type="xs:unsignedByte" use="required" />
+            <xs:attribute name="enabled_channels" type="xs:string" use="optional" />
+            <xs:attribute name="divisor" type="xs:unsignedByte" use="optional" />
+            <xs:attribute name="mode" type="xs:unsignedByte" use="optional" />
+            <xs:attribute name="alternate" type="xs:unsignedByte" use="optional" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="uartboot">
+          <xs:complexType>
+            <xs:attribute name="channel" type="xs:unsignedByte" default="0" use="optional" />
+            <xs:attribute name="baud" type="xs:unsignedInt" default="57600" use="optional" />
+            <xs:attribute name="alternate" type="xs:unsignedByte" default="1" use="optional" />
+            <xs:attribute name="flow" type="xs:string" default="true" use="optional" />
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

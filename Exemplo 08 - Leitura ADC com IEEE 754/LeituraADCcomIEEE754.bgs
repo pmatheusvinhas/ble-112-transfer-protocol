@@ -1,0 +1,41 @@
+#Fazer a leitura de um pino ADC  P0.6 e escrever a cada 10ms na caracteristica
+#e envio através do padrão IEEE-754
+#UUID : 6E400001-B5A3-F393-E0A9-E50E24DC0004
+import "../Firmware/IEEE 754/ieee754.bgs"
+
+const tempo10ms = 327  #32768/100
+dim valorADCmV
+
+procedure limpaGPIO()
+	call hardware_io_port_config_direction(0, 255)
+	call hardware_io_port_config_direction(1, 255)
+	call hardware_io_port_config_direction(2, 255)
+	call hardware_io_port_write(0,255,0)
+	call hardware_io_port_write(1,255,0)
+	call hardware_io_port_write(2,255,0)
+end
+
+event system_boot(major ,minor ,patch ,build ,ll_version ,protocol_version ,hw )
+	call gap_set_mode(gap_general_discoverable,gap_undirected_connectable)
+	call sm_set_bondable_mode(1)
+    call hardware_set_soft_timer(tempo10ms, 0, 0)
+	call limpaGPIO()
+end
+
+event hardware_soft_timer(handle)
+    call hardware_adc_read(6, 3, 2)
+end
+
+event hardware_adc_result(input, value)
+   valorADCmV = (value * 3300 / 32768)  #VREF/REGISTRADOR
+    if valorADCmV < 0 then
+        valorADCmV = 0
+    end if
+    call ieee754(valorADCmV)
+    call attributes_write(LeituraADC, 0, 4, saida)
+end
+
+#Evento de desconexão do Bluetooth, lançando novo advertising para descoberta 
+event connection_disconnected(handle,result)
+    call gap_set_mode(gap_general_discoverable,gap_undirected_connectable)
+end

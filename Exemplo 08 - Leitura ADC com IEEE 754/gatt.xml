@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <service uuid="6E400001-B5A3-F393-E0A9-E50E24DC0000" advertise="true">
+    <description>LeituraADC Embedded Lab BLE</description>
+    
+  	<characteristic uuid="2a00">
+       <properties read="true" const="true" />
+  		 <value>Embedded Lab BLE</value>
+    </characteristic>
+
+
+    <characteristic uuid="6E400001-B5A3-F393-E0A9-E50E24DC0001" id="LeituraADC">
+       <description>LeituraADC_IEEE754</description>
+       <properties read="true" indicate="true" />
+       <value length="4" />
+    </characteristic>
+
+
+  </service>
+</configuration>
